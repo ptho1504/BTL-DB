@@ -3,18 +3,15 @@ include 'partials/header.php';
 ?>
 
 <?php
-if (isset($_GET['fname'])) {
-    $fname = $_GET['fname'];
+if (isset($_GET['title'])) {
+    $title = $_GET['title'];
 }
 
-$query = "SELECT  COUNT(*) as row_count FROM PERSON WHERE FName LIKE '%$fname';";
+
+
+$query = "exec SelectNameBorrower @BookTitle = '$title';";
 $result  = sqlsrv_query($conn, $query);
-$row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-$number_of_result = $row['row_count'];
 
-
-$query = "SELECT  * FROM PERSON WHERE FName LIKE '%$fname';";
-$persons = sqlsrv_query($conn, $query);
 ?>
 <section class="empty__page">
     <div class="d-flex flex-column px-5 my-2">
@@ -28,27 +25,29 @@ $persons = sqlsrv_query($conn, $query);
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#PersonID</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Mid init</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Sex</th>
-                    <th scope="col">Thao tác</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                while ($row = sqlsrv_fetch_array($persons, SQLSRV_FETCH_ASSOC)) {
-                    $personId = $row["PersonID"];
+                while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+                    // $personId = $row["PersonID"];
                 ?>
                     <tr>
-                        <th scope="row"><?= $row["PersonID"] ?></th>
+                        <!-- <th scope="row"><?= $row["PersonID"] ?></th> -->
                         <td><?= $row["LName"] ?></td>
                         <td><?= $row["Minit"] ?></td>
                         <td><?= $row["FName"] ?></td>
                         <td><?= $row["Sex"] ?></td>
+                        <td><?= $row["phone"] ?></td>
+                        <td><?= $row["email"] ?></td>
                         <td class="d-flex p-1 gap-1">
-                            <form action="manage_person-update.php" method="post" class="w-50">
+                            <!-- <form action="manage_person-update.php" method="post" class="w-50">
                                 <input type="hidden" name="id" value="<?= $row["PersonID"] ?>">
                                 <button type="submit" class="btn btn-success w-100 update-person">
                                     SỬA
@@ -58,7 +57,7 @@ $persons = sqlsrv_query($conn, $query);
                                 <button type="button" class="btn btn-danger w-100 delete-person" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-toggle="modal" data-personid="<?= $personId ?>">
                                     XÓA
                                 </button>
-                            </div>
+                            </div> -->
                         </td>
                     </tr>
                 <?php
@@ -66,11 +65,11 @@ $persons = sqlsrv_query($conn, $query);
                 ?>
             </tbody>
         </table>
-        <?php
+        <!-- <?php
         if ($number_of_result == 0) {
             echo "<p>Không tìm thấy kết quả trả về</p>";
         }
-        ?>
+        ?> -->
 
 
 

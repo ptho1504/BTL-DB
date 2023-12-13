@@ -2,11 +2,15 @@
 include 'partials/header.php';
 ?>
 <?php
+
 $query = "SELECT COUNT(*) AS row_count FROM PERSON";
+
 $result  = sqlsrv_query($conn, $query);
+
 $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
 
 $number_of_result = $row['row_count'];
+
 
 
 
