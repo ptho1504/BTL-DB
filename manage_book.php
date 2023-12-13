@@ -3,7 +3,9 @@ include 'partials/header.php';
 ?>
 <?php
 $query = "SELECT COUNT(*) AS row_count FROM BOOK";
+
 $result  = sqlsrv_query($conn, $query);
+
 $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
 
 $number_of_result = $row['row_count'];
@@ -34,12 +36,12 @@ $books = sqlsrv_query($conn, $query);
 <section class="empty__page">
     <div class="d-flex flex-column px-5 my-2 gap-1">
         <h1 class="text-center">Quản lý Sách</h1>
-        <form class="d-flex px-5" role="search" method="get" action="manage_user-search1.php">
-            <input name="fname" class="form-control me-2" type="search" placeholder="Search By Title" aria-label="Search">
+        <form class="d-flex px-5" role="search" method="get" action="manage_book-search1.php">
+            <input name="title" class="form-control me-2" type="search" placeholder="Search By Title" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
-        <form class="d-flex px-5" role="search" method="get" action="manage_user-search2.php">
-            <input name="fname" class="form-control me-2" type="search" placeholder="Search Copy By Category" aria-label="Search">
+        <form class="d-flex px-5" role="search" method="get" action="manage_book-search2.php">
+            <input name="category" class="form-control me-2" type="search" placeholder="Search Copy By Category" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
     </div>
@@ -96,12 +98,12 @@ $books = sqlsrv_query($conn, $query);
                     <li class="page-item">
                         <a class="page-link <?php if ($page_cur <= 1) {
                                                 echo 'disabled';
-                                            } ?>" href="manage_person.php?page=<?= $page_cur - 1 ?>" aria-label="Previous">
+                                            } ?>" href="manage_book.php?page=<?= $page_cur - 1 ?>" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link active" href="manage_person.php?page=<?= $page_cur ?>">
+                        <a class="page-link active" href="manage_book.php?page=<?= $page_cur ?>">
                             <?= $page_cur ?>
                         </a>
                     </li>
@@ -109,7 +111,7 @@ $books = sqlsrv_query($conn, $query);
                     if (($page_cur + 1) <= $number_of_page) {
                     ?>
                         <li class="page-item">
-                            <a class="page-link" href="manage_person.php?page=<?= $page_cur + 1 ?>">
+                            <a class="page-link" href="manage_book.php?page=<?= $page_cur + 1 ?>">
                                 <?= $page_cur + 1 ?>
                             </a>
                         </li>
@@ -119,7 +121,7 @@ $books = sqlsrv_query($conn, $query);
                     if (($page_cur + 2) < $number_of_page) {
                     ?>
                         <li class="page-item">
-                            <a class="page-link" href="manage_person.php?page=<?= $page_cur + 2 ?>">
+                            <a class="page-link" href="manage_book.php?page=<?= $page_cur + 2 ?>">
                                 <?= $page_cur + 2 ?>
                             </a>
                         </li>
@@ -128,7 +130,7 @@ $books = sqlsrv_query($conn, $query);
                     <li class="page-item">
                         <a class="page-link <?php if ($page_cur >= $number_of_page) {
                                                 echo 'disabled';
-                                            } ?>" href="manage_person.php?page=<?= $page_cur + 1 ?>" aria-label="Next">
+                                            } ?>" href="manage_book.php?page=<?= $page_cur + 1 ?>" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

@@ -36,6 +36,9 @@ require './config/config.php'
                     <li class="nav-item mx-1">
                         <a class="nav-link active" aria-current="page" href="manage_book.php">Quản lý Sách</a>
                     </li>
+                    <li class="nav-item mx-1">
+                        <a class="nav-link active" aria-current="page" href="manage_copy.php">Quản lý Bản Copy Sách</a>
+                    </li>
                 </ul>
             </div>
         </div>
